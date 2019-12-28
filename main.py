@@ -21,7 +21,7 @@ def construct(array,parent,mi,ma):
   # print(a,b)
 parent=0
 construct(arr,parent,0,len(arr)-1)
-print(tree)
+# print(tree)
 
 def rangesum(array,parent,mi,ma,qmi,qmax,tree):
   if(qmi<=mi and qmax>=ma ):
@@ -34,7 +34,25 @@ def rangesum(array,parent,mi,ma,qmi,qmax,tree):
 print(rangesum(arr,0,0,len(arr)-1,0,1,tree))
 
 
+def update(index,mi,ma,array,parent,element,new_el):
+  if(mi==ma):
+     tree[parent]=tree[parent]-element+new_el
+     return
+  if(index>=mi and index<=ma):
+      tree[parent]=tree[parent]-element+new_el
+      mid=(mi+ma)//2
+      update(index,mi,mid,array,2*parent+1,element,new_el)
+      update(index,mid+1,ma,array,2*parent+2,element,new_el)
+index=1
+new_el=5
+pre_element=arr[index]
+arr[index]=new_el
+update(index,0,len(arr)-1,arr,0,pre_element,new_el)
+# print(tree,arr)
+print(rangesum(arr,0,0,len(arr)-1,0,2,tree))
   
+
+
 
   
 
